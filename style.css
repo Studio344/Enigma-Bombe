@@ -1,0 +1,76 @@
+/* プラグボードのボタン配置 */
+.plug-row {
+    white-space: nowrap;  /* 一列に並べて折り返さない */
+  }
+
+/* プラグボードのSVG（接続線）をボタンの前面に配置 */
+#plugboard-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* クリックを阻害しない */
+  z-index: 20; /* ボタンより前面にする */
+}
+
+/* プラグボードのボタン */
+.plug-letter {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  margin: 2px;
+  font-weight: bold;
+  user-select: none;
+  position: relative; /* 位置を明確に指定 */
+  z-index: 10; /* ボタンは線の背面にしない */
+  cursor: pointer;
+  pointer-events: auto; /* クリックを有効にする */
+}
+
+/* プラグボードのコンテナ */
+#plugboard {
+  position: relative;
+  z-index: 15; /* ボタンよりも上に配置 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+    
+  .plug-letter.btn-light {
+    background-color: #f8f9fa !important;  /* アウトラインではなく淡色塗りつぶし */
+  }
+  .plug-letter.btn-warning {
+    /* 選択中のプラグボード文字（オレンジ） */
+  }
+  .plug-letter.btn-primary {
+    /* 接続済みのプラグボード文字（青） */
+  }
+  /* プラグボードボタン押下時のエフェクト */
+  .plug-letter:active {
+    transform: translateY(2px);
+  }
+  
+  /* 小画面向けにプラグボードボタンを縮小 */
+  @media (max-width: 576px) {
+    .plug-letter {
+      width: 24px;
+      height: 24px;
+      line-height: 22px;
+      font-size: 0.8rem;
+      margin: 1px;
+    }
+  }
+  
+  /* その他UIカスタム */
+  #bombe-status {
+    min-height: 1.5em;  /* ステータス表示領域の高さを確保 */
+  }
+  #bombe-graph {
+    background-color: #fafafa;
+  }
+  
