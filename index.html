@@ -1,201 +1,183 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>エニグマ暗号機 &amp; ボンベマシン</title>
-    <!-- Bootstrap CSS (CDN) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>エニグマ暗号機 &amp; ボンベシミュレータ</title>
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="bg-light">
-<div class="container py-4">
-    <!-- Navigation tabs -->
-    <ul class="nav nav-tabs mb-3">
-        <li class="nav-item">
-            <a class="nav-link active" href="#" onclick="showEnigma(event)">エニグマ暗号機</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="showBombe(event)">ボンベマシン</a>
-        </li>
+  <!-- ヘッダー：言語切替 -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-3">
+    <div class="container">
+      <a class="navbar-brand" id="app-title" href="#">エニグマ暗号機 &amp; ボンベシミュレータ</a>
+      <div class="ms-auto">
+        <label for="languageSelect" id="language-label">言語 / Language:</label>
+        <select id="languageSelect" class="form-select form-select-sm d-inline-block w-auto">
+          <option value="ja" selected>日本語</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- タブ切替 -->
+    <ul class="nav nav-tabs mb-3" id="mainTabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#" data-tab="enigmaTab" id="tab-enigma">エニグマ / Enigma</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-tab="bombeTab" id="tab-bombe">ボンベ / Bombe</a>
+      </li>
     </ul>
 
-    <!-- Enigma Machine Section -->
-    <div id="enigmaSection">
-        <h2 class="h4 mb-3">エニグマ暗号機 シミュレーター</h2>
-        <!-- Rotor settings -->
-        <div class="mb-3">
-            <label class="form-label fw-bold">ローター設定</label>
-            <div class="row gx-2 gy-2">
-                <div class="col-12 col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-text">左ローター</span>
-                        <select id="rotorL" class="form-select">
-                            <option value="I" selected>I</option>
-                            <option value="II">II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
-                            <option value="V">V</option>
-                        </select>
-                        <select id="posL" class="form-select">
-                            <option value="A" selected>A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                            <option value="F">F</option>
-                            <option value="G">G</option>
-                            <option value="H">H</option>
-                            <option value="I">I</option>
-                            <option value="J">J</option>
-                            <option value="K">K</option>
-                            <option value="L">L</option>
-                            <option value="M">M</option>
-                            <option value="N">N</option>
-                            <option value="O">O</option>
-                            <option value="P">P</option>
-                            <option value="Q">Q</option>
-                            <option value="R">R</option>
-                            <option value="S">S</option>
-                            <option value="T">T</option>
-                            <option value="U">U</option>
-                            <option value="V">V</option>
-                            <option value="W">W</option>
-                            <option value="X">X</option>
-                            <option value="Y">Y</option>
-                            <option value="Z">Z</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-text">中ローター</span>
-                        <select id="rotorM" class="form-select">
-                            <option value="I">I</option>
-                            <option value="II" selected>II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
-                            <option value="V">V</option>
-                        </select>
-                        <select id="posM" class="form-select">
-                            <option value="A" selected>A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                            <option value="F">F</option>
-                            <option value="G">G</option>
-                            <option value="H">H</option>
-                            <option value="I">I</option>
-                            <option value="J">J</option>
-                            <option value="K">K</option>
-                            <option value="L">L</option>
-                            <option value="M">M</option>
-                            <option value="N">N</option>
-                            <option value="O">O</option>
-                            <option value="P">P</option>
-                            <option value="Q">Q</option>
-                            <option value="R">R</option>
-                            <option value="S">S</option>
-                            <option value="T">T</option>
-                            <option value="U">U</option>
-                            <option value="V">V</option>
-                            <option value="W">W</option>
-                            <option value="X">X</option>
-                            <option value="Y">Y</option>
-                            <option value="Z">Z</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-text">右ローター</span>
-                        <select id="rotorR" class="form-select">
-                            <option value="I">I</option>
-                            <option value="II">II</option>
-                            <option value="III" selected>III</option>
-                            <option value="IV">IV</option>
-                            <option value="V">V</option>
-                        </select>
-                        <select id="posR" class="form-select">
-                            <option value="A" selected>A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                            <option value="F">F</option>
-                            <option value="G">G</option>
-                            <option value="H">H</option>
-                            <option value="I">I</option>
-                            <option value="J">J</option>
-                            <option value="K">K</option>
-                            <option value="L">L</option>
-                            <option value="M">M</option>
-                            <option value="N">N</option>
-                            <option value="O">O</option>
-                            <option value="P">P</option>
-                            <option value="Q">Q</option>
-                            <option value="R">R</option>
-                            <option value="S">S</option>
-                            <option value="T">T</option>
-                            <option value="U">U</option>
-                            <option value="V">V</option>
-                            <option value="W">W</option>
-                            <option value="X">X</option>
-                            <option value="Y">Y</option>
-                            <option value="Z">Z</option>
-                        </select>
-                    </div>
-                </div>
+    <!-- Enigma セクション -->
+    <div id="enigmaTab" class="tab-content">
+      <h2 id="enigma-title" class="h4 mb-3">エニグマ暗号機シミュレータ</h2>
+      
+      <!-- ローター設定カード -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="mb-3">
+            <label id="rotor-selection-label" class="fw-bold">ローター選択 (Rotors I–V):</label>
+            <div class="row">
+              <div class="col-sm-4">
+                <select id="rotor1-select" class="form-select">
+                  <option value="I" selected>I</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <select id="rotor2-select" class="form-select">
+                  <option value="I">I</option>
+                  <option value="II" selected>II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <select id="rotor3-select" class="form-select">
+                  <option value="I">I</option>
+                  <option value="II">II</option>
+                  <option value="III" selected>III</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                </select>
+              </div>
             </div>
-        </div>
-        <!-- Plugboard settings -->
-        <div class="mb-3">
-            <label class="form-label fw-bold">プラグボード</label>
-            <div id="plugboardContainer" class="position-relative d-flex flex-wrap justify-content-center align-items-center mb-2">
-                <!-- Letters will be inserted here -->
-                <svg id="plugboardLines" class="position-absolute top-0 start-0"></svg>
+          </div>
+          <div class="mb-3">
+            <label id="initial-positions-label" class="fw-bold">初期位置 (Initial Positions):</label>
+            <div class="row">
+              <div class="col-sm-4">
+                <select id="pos1-select" class="form-select"></select>
+              </div>
+              <div class="col-sm-4">
+                <select id="pos2-select" class="form-select"></select>
+              </div>
+              <div class="col-sm-4">
+                <select id="pos3-select" class="form-select"></select>
+              </div>
             </div>
-            <div class="form-text">文字をクリックして組んでください。（接続済みの文字をクリックすると接続解除）</div>
-        </div>
-        <!-- Text input/output -->
-        <div class="mb-3">
-            <label for="inputText" class="form-label fw-bold">暗号化/復号するテキストを入力:</label>
-            <textarea id="inputText" class="form-control" rows="3" placeholder="例: HELLO WORLD"></textarea>
-        </div>
-        <div class="mb-3">
-            <button id="encButton" class="btn btn-primary">暗号化/復号</button>
-        </div>
-        <div class="mb-3">
-            <label for="outputText" class="form-label fw-bold">出力</label>
-            <div class="position-relative">
-                <textarea id="outputText" class="form-control output-textarea" rows="3" readonly></textarea>
-                <button id="copyButton" class="btn btn-outline-secondary btn-sm position-absolute" style="top: 5px; right: 5px;">コピー</button>
+          </div>
+          
+          <!-- プラグボード設定カード -->
+          <div class="card mb-3">
+            <div class="card-header" id="plugboard-label">プラグボード (各文字をクリックしてペアを作成)</div>
+            <!-- IDを追加して、ボタン群の上部余白をなくす -->
+            <div class="card-body" id="plugboard-body">
+              <div id="plugboard-container" class="position-relative">
+                <!-- SVGは今回使用せず、ペアの色で判別 -->
+                <div id="plugboard-svg-container">
+                  <svg id="plugboard-svg"></svg>
+                </div>
+                <!-- プラグボードのボタン（中央配置・均等間隔） -->
+                <div id="plugboard-buttons"></div>
+              </div>
+              <small class="form-text text-muted">
+                ボタンをクリックしてペアを作成／解除してください。<br>
+                ※ペアになったボタンは同じ色で表示されます。
+              </small>
+              <button id="clear-plugboard-btn" class="btn btn-sm btn-outline-danger mt-2">クリア</button>
             </div>
+          </div>
+          
+          <!-- 入出力エリア -->
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="plaintext" id="plaintext-label" class="fw-bold">平文 (Plaintext):</label>
+                <textarea id="plaintext" class="form-control" rows="3" placeholder="例: this is sample text"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="ciphertext" id="ciphertext-label" class="fw-bold">暗号文 (Ciphertext):</label>
+                <textarea id="ciphertext" class="form-control" rows="3" placeholder="結果がここに表示されます" readonly></textarea>
+              </div>
+              <div class="d-flex justify-content-center gap-2">
+                <button id="encrypt-btn" class="btn btn-primary">暗号化 / Encrypt</button>
+                <button id="decrypt-btn" class="btn btn-secondary">復号 / Decrypt</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-end">
+            <button id="help-btn" class="btn btn-info btn-sm">ヘルプ / Help</button>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- Bombe Machine Section -->
-    <div id="bombeSection" style="display: none;">
-        <h2 class="h4 mb-3">ボンベマシン 解読ツール</h2>
-        <div class="mb-3">
-            <label for="cribText" class="form-label">Crib (既知の平文)</label>
-            <input type="text" id="cribText" class="form-control" placeholder="例: WETTERVORHERSAGE" />
+    <!-- Bombe セクション -->
+    <div id="bombeTab" class="tab-content" style="display: none;">
+      <h2 id="bombe-title" class="h4 mb-3">ボンベマシン (Bombe Machine)</h2>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="crib-text" id="crib-label" class="fw-bold">既知の平文 (Crib):</label>
+            <input type="text" id="crib-text" class="form-control" placeholder="例: this is sample text" />
+          </div>
+          <div class="mb-3">
+            <label for="crib-cipher" id="crib-cipher-label" class="fw-bold">Cribに対応する暗号文:</label>
+            <input type="text" id="crib-cipher" class="form-control" placeholder="例: OPGN DX VXOLOT NBJW" />
+          </div>
+          <div class="mb-3">
+            <label for="full-cipher" id="full-cipher-label" class="fw-bold">暗号文全文 (Full Ciphertext):</label>
+            <textarea id="full-cipher" class="form-control" rows="3" placeholder="全文を入力"></textarea>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button id="bombe-btn" class="btn btn-primary">鍵探索開始 / Find Key</button>
+          </div>
         </div>
-        <div class="mb-3">
-            <label for="cribCipher" class="form-label">対応する暗号文</label>
-            <input type="text" id="cribCipher" class="form-control" placeholder="例: SNMKGGSTZZ (WETTERVORHERSAGEに対応)" />
-        </div>
-        <div class="mb-3">
-            <label for="cipherText" class="form-label">暗号文全文</label>
-            <textarea id="cipherText" class="form-control" rows="3" placeholder="例: SNMKG GSTZZ UGARL VYQGM YWMLU"></textarea>
-        </div>
-        <div class="mb-3">
-            <button id="bombeButton" class="btn btn-primary">解読開始</button>
-        </div>
-        <div id="bombeResults"></div>
+      </div>
+      <div id="bombe-results"></div>
+      <div id="bombe-progress" class="mt-3"></div>
     </div>
-</div>
-<script src="script.js"></script>
+  </div>
+
+  <!-- ヘルプモーダル (Bootstrap Modal) -->
+  <div id="help-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="help-title">ローターの説明 / Rotor Explanation</h5>
+          <button type="button" class="btn-close" id="help-close"></button>
+        </div>
+        <div class="modal-body" id="help-content">
+          <!-- ヘルプ内容は script.js で設定 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (Bundle) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

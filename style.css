@@ -1,26 +1,85 @@
-/* モダンなデザインを適用したスタイル */
+/* 全体 */
 body {
-  font-family: sans-serif;
+  background-color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* ヘッダー */
+.navbar-brand {
+  font-weight: bold;
+}
+
+/* --- プラグボード関連 --- */
+
+/* プラグボードを含むカード本体で、上部余白を詰める */
+.card .card-body > #plugboard-container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* プラグボードコンテナ */
+#plugboard-container {
+  position: relative;
+  border: 1px solid #ddd;
+  /* 上部の余白を無くし、左右下に 10px の余白 */
+  padding: 0 10px 10px 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  /* 高さ固定：2行分 */
+  height: 120px;
+  overflow: hidden;
+  display: flex;
+  /* 内部要素を上部に揃える */
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* SVG は今回使用せず（ペアの色で判別するため非表示） */
+#plugboard-svg-container {
+  display: none;
+}
+
+/* プラグボードのボタン配置 */
+#plugboard-buttons {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* ボタン配列をコンテナー上部に */
+  align-self: flex-start;
+}
+
+/* 各行：中央配置・均等間隔 */
+.plugboard-row {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1vw;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+/* プラグボードボタン */
 .plug-letter {
   width: 40px;
   height: 40px;
-  margin: 3px;
-  padding: 0;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  border: 1px solid #ccc;
+  font-weight: bold;
   text-align: center;
   line-height: 40px;
-  border-radius: 50%;
-  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+  z-index: 3;
 }
-#plugboardLines {
-  pointer-events: none;
-  z-index: 1;
-}
-.output-textarea {
-  padding-right: 3rem;
-}
-.plaintext-output {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+
+/* 選択状態（背景色は setPlugPair() でインライン指定） */
+.plug-letter.selected {
+  color: #fff !important;
 }
