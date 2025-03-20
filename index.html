@@ -88,21 +88,14 @@
             </div>
           </div>
           
-          <!-- プラグボード設定カード -->
+          <!-- プラグボード設定カード（エニグマ用） -->
           <div class="card mb-3">
             <div class="card-header" id="plugboard-label">プラグボード (各文字をクリックしてペアを作成)</div>
-            <!-- IDを追加して、ボタン群の上部余白をなくす -->
-            <div class="card-body" id="plugboard-body">
+            <div class="card-body">
               <div id="plugboard-container" class="position-relative">
-                <!-- SVGは今回使用せず、ペアの色で判別 -->
-                <div id="plugboard-svg-container">
-                  <svg id="plugboard-svg"></svg>
-                </div>
-                <!-- プラグボードのボタン（中央配置・均等間隔） -->
                 <div id="plugboard-buttons"></div>
               </div>
               <small class="form-text text-muted">
-                ボタンをクリックしてペアを作成／解除してください。<br>
                 ※ペアになったボタンは同じ色で表示されます。
               </small>
               <button id="clear-plugboard-btn" class="btn btn-sm btn-outline-danger mt-2">クリア</button>
@@ -114,11 +107,11 @@
             <div class="card-body">
               <div class="mb-3">
                 <label for="plaintext" id="plaintext-label" class="fw-bold">平文 (Plaintext):</label>
-                <textarea id="plaintext" class="form-control" rows="3" placeholder="例: this is sample text"></textarea>
+                <textarea id="plaintext" class="form-control" rows="3">this is test message</textarea>
               </div>
               <div class="mb-3">
                 <label for="ciphertext" id="ciphertext-label" class="fw-bold">暗号文 (Ciphertext):</label>
-                <textarea id="ciphertext" class="form-control" rows="3" placeholder="結果がここに表示されます" readonly></textarea>
+                <textarea id="ciphertext" class="form-control" rows="3" readonly>OPGN DX HYKA TTJNMHT</textarea>
               </div>
               <div class="d-flex justify-content-center gap-2">
                 <button id="encrypt-btn" class="btn btn-primary">暗号化 / Encrypt</button>
@@ -139,25 +132,34 @@
       <h2 id="bombe-title" class="h4 mb-3">ボンベマシン (Bombe Machine)</h2>
       <div class="card mb-3">
         <div class="card-body">
+          <!-- プラグボード不明モードはボンベページ専用 -->
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="ignore-plugboard">
+            <label class="form-check-label" for="ignore-plugboard">
+              プラグボード不明モード / Plugboard Unknown
+            </label>
+          </div>
           <div class="mb-3">
             <label for="crib-text" id="crib-label" class="fw-bold">既知の平文 (Crib):</label>
-            <input type="text" id="crib-text" class="form-control" placeholder="例: this is sample text" />
+            <input type="text" id="crib-text" class="form-control" value="TEST" />
           </div>
           <div class="mb-3">
             <label for="crib-cipher" id="crib-cipher-label" class="fw-bold">Cribに対応する暗号文:</label>
-            <input type="text" id="crib-cipher" class="form-control" placeholder="例: OPGN DX VXOLOT NBJW" />
+            <input type="text" id="crib-cipher" class="form-control" value="HYKA" />
           </div>
           <div class="mb-3">
             <label for="full-cipher" id="full-cipher-label" class="fw-bold">暗号文全文 (Full Ciphertext):</label>
-            <textarea id="full-cipher" class="form-control" rows="3" placeholder="全文を入力"></textarea>
+            <textarea id="full-cipher" class="form-control" rows="3">OPGN DX HYKA TTJNMHT</textarea>
           </div>
           <div class="d-flex justify-content-center">
             <button id="bombe-btn" class="btn btn-primary">鍵探索開始 / Find Key</button>
           </div>
         </div>
       </div>
-      <div id="bombe-results"></div>
+      <!-- 探索進捗・ログ表示 -->
       <div id="bombe-progress" class="mt-3"></div>
+      <div id="bombe-log" class="mt-3" style="max-height:200px; overflow-y:auto; background:#f0f0f0; padding: 10px; border:1px solid #ccc;"></div>
+      <div id="bombe-results"></div>
     </div>
   </div>
 
